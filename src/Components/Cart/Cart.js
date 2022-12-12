@@ -18,7 +18,7 @@ const Cart = (props) => {
                 <Modal.Title>CART</Modal.Title>
             </Modal.Header>
             {hasItems && <Modal.Body>{cartItems}</Modal.Body>}
-            {!hasItems && <Modal.Body>Cart is empty.</Modal.Body>}
+            {!hasItems && <Modal.Body className="text-center">Cart is empty.</Modal.Body>}
             {hasItems && <Modal.Footer><span>Total Amount: Rs. {cartCtx.totalAmount}</span><span className="float-start">BUY BUTTON</span></Modal.Footer>}
         </Modal>
     );

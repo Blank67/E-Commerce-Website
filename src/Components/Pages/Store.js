@@ -2,6 +2,7 @@ import { Fragment, useContext, useState } from "react";
 import { Modal } from "react-bootstrap";
 import CartContext from "../../store/cart-context";
 import Products from '../../store/products'
+import Jumbotron from "../Layout/Jumbotron";
 
 const Store = (props) => {
 
@@ -13,7 +14,7 @@ const Store = (props) => {
 
     const addItemToCarthandler = (item) => {
         const existItemIndex = cartCtx.items.findIndex((itm) => itm.id === item.id)
-        if(existItemIndex !== -1){
+        if (existItemIndex !== -1) {
             setItemExist(true);
             return;
         }
@@ -24,15 +25,16 @@ const Store = (props) => {
         })
     }
 
-    const itemsList = Products.map((itm) => {
+    const itemsList = Products.map((itm, index) => {
         return (
-            <div key={itm.id}>
-                <div className="card" style={{ width: '20rem' }}>
+            <div key={itm.id} className="d-flex justify-content-center">
+                <div className="card my-3" style={{ width: '16rem' }}>
+                    <div className="card-header text-center">Album {index + 1}</div>
                     <img src={itm.imageUrl} alt="itemImage.jpeg" />
                     <div className="card-body">
                         <div className="card-title">{itm.title}</div>
                         <span>Rs. {itm.price}</span>
-                        <button className="btn btn-primary float-end" onClick={addItemToCarthandler.bind(null,itm)}>ADD TO CART</button>
+                        <button className="btn btn-primary float-end" onClick={addItemToCarthandler.bind(null, itm)}>ADD TO CART</button>
                     </div>
                 </div>
             </div>
@@ -41,11 +43,9 @@ const Store = (props) => {
 
     return (
         <Fragment>
-            <section>
-                <div className="d-flex justify-content-center">THE GENERICS</div>
-            </section>
-            <Modal show={itemExist} onHide={removeAlertHandler} centered><Modal.Body>ITEM ALREADY ADDED TO CART</Modal.Body></Modal>
-            <section>
+            <h1 className="text-center m-2">Music</h1>
+            <Modal show={itemExist} onHide={removeAlertHandler} centered><Modal.Body className="text-center">ITEM ALREADY ADDED TO CART</Modal.Body></Modal>
+            <section className="d-flex justify-content-center">
                 <div className="row row-cols-2">{itemsList}</div>
             </section>
         </Fragment>
