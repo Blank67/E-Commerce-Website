@@ -2,7 +2,6 @@ import { Fragment, useContext, useState } from "react";
 import { Modal } from "react-bootstrap";
 import CartContext from "../../store/cart-context";
 import Products from '../../store/products'
-import Jumbotron from "../Layout/Jumbotron";
 
 const Store = (props) => {
 
