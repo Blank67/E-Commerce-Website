@@ -15,7 +15,7 @@ const Header = (props) => {
                     </button>
 
                     {/* NavBar Menus */}
-                    <div className="collapse navbar-collapse" id="navBar1">
+                    <div className="collapse navbar-collapse justify-content-center" id="navBar1">
                         <ul className="navbar-nav">
                             <li className="nav-item">
                                 <a href="#" className="nav-link active" aria-current="page">Home</a>

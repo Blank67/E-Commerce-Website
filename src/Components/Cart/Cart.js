@@ -8,7 +8,7 @@ const Cart = (props) => {
     const cartCtx = useContext(CartContext);
     const hasItems = cartCtx.items.length > 0;
     const cartItemRemoveHandler = (id) => {
-
+        cartCtx.removeItem(id);
     }
     const cartItems = cartCtx.items.map((itm) => (<CartItem key={itm.id} title={itm.title} price={itm.price} onRemove={cartItemRemoveHandler.bind(null,itm.id)} />));
 
