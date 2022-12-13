@@ -25,7 +25,7 @@ function App() {
       <Header onShow={showCartHandler}/>
       <Jumbotron heading="The Generics" />
       {cartVisibility && <Cart onHide={hideCartHandler} />}
-      <Route path='/'><Store /></Route>
+      <Route exact path='/'><Store /></Route>
       <Route path='/home'><Home /></Route>
       <Route path='/store'><Store /></Route>
       <Route path='/about'><About /></Route>
