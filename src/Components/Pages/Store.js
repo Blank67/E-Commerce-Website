@@ -1,5 +1,6 @@
 import { Fragment, useContext, useState } from "react";
 import { Modal } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import CartContext from "../../store/cart-context";
 import Products from '../../store/products'
 import Jumbotron from "../Layout/Jumbotron";
@@ -30,9 +31,14 @@ const Store = (props) => {
             <div key={itm.id} className="d-flex justify-content-center">
                 <div className="card my-3" style={{ width: '16rem' }}>
                     <div className="card-header text-center">Album {index + 1}</div>
+                    {/* <div className="bg-image hover-zoom">
+                        <img className="w-100" src={itm.imageUrl} alt="itemImage.jpeg" />
+                    </div> */}
                     <img src={itm.imageUrl} alt="itemImage.jpeg" />
                     <div className="card-body">
-                        <div className="card-title">{itm.title}</div>
+                        <Link to={`/store/${itm.id}`}>
+                            <div className="card-title">{itm.title}</div>
+                        </Link>
                         <span>Rs. {itm.price}</span>
                         <button className="btn btn-primary float-end" onClick={addItemToCarthandler.bind(null, itm)}>ADD TO CART</button>
                     </div>
