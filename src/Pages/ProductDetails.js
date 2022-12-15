@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import CartContext from "../../store/cart-context";
-import Products from '../../store/products'
+import CartContext from "../store/cart-context";
+import Products from '../store/products'
 
 const ProductDetails = (props) => {
 
