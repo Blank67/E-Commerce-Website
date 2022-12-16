@@ -1,5 +1,6 @@
 import { Fragment, useContext, useRef, useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import AuthContext from "../firebase/auth-context";
 
 const Login = (props) => {
@@ -9,6 +10,7 @@ const Login = (props) => {
     const emailRef = useRef('');
     const passwordRef = useRef('');
     const authCtx = useContext(AuthContext);
+    const history = useHistory();
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
@@ -32,9 +34,10 @@ const Login = (props) => {
             })
             // console.log(response);
             let transformedResponse = await response.json();
-            console.log(transformedResponse);
+            // console.log(transformedResponse);
             if (response.ok) {
                 authCtx.login(transformedResponse.idToken);
+                history.replace('/store');
                 // setIsLoggedIn(true);
             } else {
                 let errorMessage = 'Authentication Failed!';
@@ -73,9 +76,6 @@ const Login = (props) => {
                                         <Button variant="warning" type="submit" onClick={onSubmitHandler}>Login</Button>
                                     </div>
                                 </Form>
-                                <div className="text-center mt-1">
-                                    <Button>Create Account</Button>
-                                </div>
                             </Card.Body>
                         </Card>
                     </Col>

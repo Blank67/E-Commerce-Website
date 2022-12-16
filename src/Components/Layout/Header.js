@@ -1,8 +1,18 @@
-import React, { Fragment } from "react";
-import { NavLink } from "react-router-dom";
+import React, { Fragment, useContext } from "react";
+import { Button } from "react-bootstrap";
+import { NavLink, useHistory } from "react-router-dom";
+import AuthContext from "../../firebase/auth-context";
 import HeaderCartButton from "./HeaderCartButton";
 
 const Header = (props) => {
+    const authCtx = useContext(AuthContext);
+    const history = useHistory();
+
+    const logoutHandler = () => {
+        authCtx.logout();
+        history.replace('/');
+    }
+
     return (
         <Fragment>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -20,23 +30,25 @@ const Header = (props) => {
                             <li className="nav-item">
                                 <NavLink to='/home' className="nav-link" aria-current="page">Home</NavLink>
                             </li>
-                            <li className="nav-item">
+                            {authCtx.isLoggedIn && <li className="nav-item">
                                 <NavLink to='/store' className="nav-link" aria-current="page">Store</NavLink>
-                            </li>
+                            </li>}
                             <li className="nav-item">
                                 <NavLink to='/about' className="nav-link">About</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink to='/contact-us' className='nav-link'>Contact Us</NavLink>
                             </li>
-                            <li className="nav-item">
+                            {!authCtx.isLoggedIn &&  <li className="nav-item">
                                 <NavLink to='/login' className='nav-link'>Login</NavLink>
-                            </li>
+                            </li>}
                         </ul>
                     </div>
 
                     {/* Cart Button */}
-                    <HeaderCartButton onHide={props.onHide} onShow={props.onShow} />
+                    {authCtx.isLoggedIn && <HeaderCartButton onHide={props.onHide} onShow={props.onShow} />}
+                    {authCtx.isLoggedIn && <Button className="ms-1" onClick={logoutHandler}>Logout</Button>}
+                    {!authCtx.isLoggedIn && <Button>Create Account</Button>}
                 </div>
             </nav>
         </Fragment>

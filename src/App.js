@@ -1,7 +1,8 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useContext, useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Cart from './Components/Cart/Cart';
+import AuthContext from './firebase/auth-context';
 // import Footer from './Components/Layout/Footer';
 // import Header from './Components/Layout/Header';
 // import About from './Pages/About';
@@ -25,8 +26,9 @@ const Login = React.lazy(() => import('./Pages/Login'));
 
 const API_URL = 'https://react-ecommnerce-data-default-rtdb.firebaseio.com/users.json';
 
-function App() {
+const App = () => {
   const [cartVisibility, setCartVisibility] = useState(false);
+  const authCtx = useContext(AuthContext);
 
   const showCartHandler = () => {
     setCartVisibility(true);
@@ -51,14 +53,15 @@ function App() {
       <Suspense fallback={<h1 className='text-center'>LOADING.....</h1>}>
         <Switch>
           <Route exact path='/'>
-            <Redirect to='/store' />
+            <Redirect to='/login' />
           </Route>
           <Route path='/home'><Home /></Route>
-          <Route exact path='/store'><Store /></Route>
+          {authCtx.isLoggedIn && <Route exact path='/store'><Store /></Route>}
           <Route path='/about'><About /></Route>
           <Route path='/contact-us'><ContactUs onPost={onPostDataHandler} /></Route>
-          <Route path='/store/:productId'><ProductDetails /></Route>
-          <Route path='/login'><Login /></Route>
+          {!authCtx.isLoggedIn && <Route path='/store/:productId'><ProductDetails /></Route>}
+          {!authCtx.isLoggedIn && <Route path='/login'><Login /></Route>}
+          <Route path='*'><Redirect to='/' /></Route>
         </Switch>
       </Suspense>
       <Footer />
