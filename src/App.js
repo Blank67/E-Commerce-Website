@@ -10,6 +10,7 @@ import Cart from './Components/Cart/Cart';
 // import ProductDetails from './Pages/ProductDetails';
 // import Store from './Pages/Store';
 // import CartProvider from './store/CartProvider';
+// import Login from './Pages/Login';
 
 // const Cart = React.lazy(() => import('./Components/Cart/Cart'));
 const Footer = React.lazy(() => import('./Components/Layout/Footer'));
@@ -20,6 +21,7 @@ const Home = React.lazy(() => import('./Pages/Home'));
 const ProductDetails = React.lazy(() => import('./Pages/ProductDetails'));
 const Store = React.lazy(() => import('./Pages/Store'));
 const CartProvider = React.lazy(() => import('./store/CartProvider'));
+const Login = React.lazy(() => import('./Pages/Login'));
 
 const API_URL = 'https://react-ecommnerce-data-default-rtdb.firebaseio.com/users.json';
 
@@ -56,6 +58,7 @@ function App() {
           <Route path='/about'><About /></Route>
           <Route path='/contact-us'><ContactUs onPost={onPostDataHandler} /></Route>
           <Route path='/store/:productId'><ProductDetails /></Route>
+          <Route path='/login'><Login /></Route>
         </Switch>
       </Suspense>
       <Footer />
