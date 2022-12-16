@@ -19,7 +19,7 @@ const Header = (props) => {
                 <div className="container">
 
                     {/* Logo and Side button  */}
-                    <NavLink to='/store' className="navbar-brand">E-Commerce</NavLink>
+                    <NavLink to='/about' className="navbar-brand">E-Commerce</NavLink>
                     <button className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navBar1" aria-controls="navBar1" aria-label="Expand Navigation">
                         <div className="navbar-toggler-icon" />
                     </button>
@@ -48,7 +48,7 @@ const Header = (props) => {
                     {/* Cart Button */}
                     {authCtx.isLoggedIn && <HeaderCartButton onHide={props.onHide} onShow={props.onShow} />}
                     {authCtx.isLoggedIn && <Button className="ms-1" onClick={logoutHandler}>Logout</Button>}
-                    {!authCtx.isLoggedIn && <Button>Create Account</Button>}
+                    {!authCtx.isLoggedIn && <Button><NavLink to='/signup' className='nav-link'>Create Account</NavLink></Button>}
                 </div>
             </nav>
         </Fragment>

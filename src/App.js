@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Cart from './Components/Cart/Cart';
 import AuthContext from './firebase/auth-context';
+import SignUp from './Pages/SignUp';
 // import Footer from './Components/Layout/Footer';
 // import Header from './Components/Layout/Header';
 // import About from './Pages/About';
@@ -61,7 +62,8 @@ const App = () => {
           <Route path='/contact-us'><ContactUs onPost={onPostDataHandler} /></Route>
           {!authCtx.isLoggedIn && <Route path='/store/:productId'><ProductDetails /></Route>}
           {!authCtx.isLoggedIn && <Route path='/login'><Login /></Route>}
-          <Route path='*'><Redirect to='/' /></Route>
+          {!authCtx.isLoggedIn && <Route><SignUp path='/signup' /></Route>}
+          <Route path='*'><Redirect to='/home' /></Route>
         </Switch>
       </Suspense>
       <Footer />
