@@ -8,7 +8,7 @@ const HeaderCartButton = (props) => {
 
     return (
         <Fragment>
-            <button className="btn btn-outline-primary" onClick={props.onShow}>
+            <button className="btn btn-outline-primary ms-sm-3" onClick={props.onShow}>
                 Cart
             <sup style={{color: 'white'}}>{cartItemsCount}</sup>
             </button>

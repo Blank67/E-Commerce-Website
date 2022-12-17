@@ -60,9 +60,9 @@ const App = () => {
           {authCtx.isLoggedIn && <Route exact path='/store'><Store /></Route>}
           <Route path='/about'><About /></Route>
           <Route path='/contact-us'><ContactUs onPost={onPostDataHandler} /></Route>
-          {!authCtx.isLoggedIn && <Route path='/store/:productId'><ProductDetails /></Route>}
+          {authCtx.isLoggedIn && <Route path='/store/:productId'><ProductDetails /></Route>}
           {!authCtx.isLoggedIn && <Route path='/login'><Login /></Route>}
-          {!authCtx.isLoggedIn && <Route><SignUp path='/signup' /></Route>}
+          {!authCtx.isLoggedIn && <Route path='/signup' ><SignUp/></Route>}
           <Route path='*'><Redirect to='/home' /></Route>
         </Switch>
       </Suspense>
