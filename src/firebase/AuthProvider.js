@@ -7,6 +7,11 @@ const AuthProvider = (props) => {
     const [token, setToken] = useState(initialToken);
     const userIsLoggedIn = !!token;
 
+    // const refreshToken = (tkn) => {
+    //     setToken(tkn);
+    //     localStorage.setItem('token', tkn);
+    // }
+
     const loginHandler = (tkn) => {
         setToken(tkn);
         localStorage.setItem('token', tkn);
@@ -20,7 +25,8 @@ const AuthProvider = (props) => {
         token: token,
         isLoggedIn: userIsLoggedIn,
         login: loginHandler,
-        logout: logoutHandler
+        logout: logoutHandler,
+        // refresh: refreshToken
     };
     return (
         <AuthContext.Provider value={authContextValue}>

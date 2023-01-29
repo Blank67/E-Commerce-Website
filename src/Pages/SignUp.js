@@ -28,7 +28,7 @@ const SignUp = (props) => {
                     'Content-Type': 'application/json'
                 }
             })
-            let transformedResponse = await response.json();
+            const transformedResponse = await response.json();
             // console.log(response);
             // console.log(transformedResponse);
             if (response.ok) {

@@ -42,6 +42,9 @@ const Header = (props) => {
                         {!authCtx.isLoggedIn && <li className="nav-item">
                             <NavLink to='/login' className='nav-link'>Login</NavLink>
                         </li>}
+                        {authCtx.isLoggedIn && <li className="nav-item">
+                            <NavLink to='/profile' className="nav-link" aria-current="page">My Profile</NavLink>
+                        </li>}
                     </ul>
                 </div>
 

@@ -13,6 +13,7 @@ import SignUp from './Pages/SignUp';
 // import Store from './Pages/Store';
 // import CartProvider from './store/CartProvider';
 // import Login from './Pages/Login';
+// import Profile from './Pages/Profile';
 
 // const Cart = React.lazy(() => import('./Components/Cart/Cart'));
 const Footer = React.lazy(() => import('./Components/Layout/Footer'));
@@ -24,6 +25,7 @@ const ProductDetails = React.lazy(() => import('./Pages/ProductDetails'));
 const Store = React.lazy(() => import('./Pages/Store'));
 const CartProvider = React.lazy(() => import('./store/CartProvider'));
 const Login = React.lazy(() => import('./Pages/Login'));
+const Profile = React.lazy(() => import('./Pages/Profile'));
 
 const API_URL = 'https://react-ecommnerce-data-default-rtdb.firebaseio.com/users.json';
 
@@ -62,7 +64,8 @@ const App = () => {
           <Route path='/contact-us'><ContactUs onPost={onPostDataHandler} /></Route>
           {authCtx.isLoggedIn && <Route path='/store/:productId'><ProductDetails /></Route>}
           {!authCtx.isLoggedIn && <Route path='/login'><Login /></Route>}
-          {!authCtx.isLoggedIn && <Route path='/signup' ><SignUp/></Route>}
+          {!authCtx.isLoggedIn && <Route path='/signup' ><SignUp /></Route>}
+          {authCtx.isLoggedIn && <Route path='/profile' ><Profile /></Route>}
           <Route path='*'><Redirect to='/home' /></Route>
         </Switch>
       </Suspense>
