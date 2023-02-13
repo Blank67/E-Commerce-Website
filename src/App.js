@@ -39,25 +39,31 @@ const App = () => {
 
   return (
     <>
-      <Header onShow={showCartHandler} />
-      {cartVisibility && <Cart onHide={hideCartHandler} />}
-      <Suspense fallback={<h1 className='text-center'>LOADING.....</h1>}>
-        <Switch>
-          <Route exact path='/'>
-            <Redirect to='/login' />
-          </Route>
-          <Route path='/home'><Home /></Route>
-          {loginStatus && <Route exact path='/store'><Store /></Route>}
-          <Route path='/about'><About /></Route>
-          <Route path='/contact-us'><ContactUs onPost={onPostDataHandler} /></Route>
-          {loginStatus && <Route path='/store/:productId'><ProductDetails /></Route>}
-          {!loginStatus && <Route path='/login'><Login /></Route>}
-          {!loginStatus && <Route path='/signup' ><SignUp /></Route>}
-          {loginStatus && <Route path='/profile' ><Profile /></Route>}
-          <Route path='*'><Redirect to='/home' /></Route>
-        </Switch>
-      </Suspense>
-      <Footer />
+      <section>
+        <Header onShow={showCartHandler} />
+        {cartVisibility && <Cart onHide={hideCartHandler} />}
+      </section>
+      <section style={{display: 'flex', flexDirection: 'column', minHeight: '85.2vh'}}>
+        <Suspense fallback={<h1 className='text-center'>LOADING.....</h1>}>
+          <Switch>
+            <Route exact path='/'>
+              <Redirect to='/login' />
+            </Route>
+            <Route path='/home'><Home /></Route>
+            {loginStatus && <Route exact path='/store'><Store /></Route>}
+            <Route path='/about'><About /></Route>
+            <Route path='/contact-us'><ContactUs onPost={onPostDataHandler} /></Route>
+            {loginStatus && <Route path='/store/:productId'><ProductDetails /></Route>}
+            {!loginStatus && <Route path='/login'><Login /></Route>}
+            {!loginStatus && <Route path='/signup' ><SignUp /></Route>}
+            {loginStatus && <Route path='/profile' ><Profile /></Route>}
+            <Route path='*'><Redirect to='/home' /></Route>
+          </Switch>
+        </Suspense>
+      </section>
+      <section style={{marginTop: 'auto'}}>
+        <Footer />
+      </section>
     </>
   );
 }
