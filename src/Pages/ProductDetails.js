@@ -1,13 +1,15 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Modal } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import CartContext from "../store/cart-context";
+import { cartActions } from "../redux-store/cart-slice/cart-slice";
 import Products from '../store/products'
 
 const ProductDetails = (props) => {
 
     const params = useParams();
-    const cartCtx = useContext(CartContext);
+    const dispatch = useDispatch();
+    const cartArray = useSelector(state => state.cart.cart);
     const product = Products.find((itm) => itm.id === params.productId);
     const [itemExist, setItemExist] = useState(false);
 
@@ -15,16 +17,17 @@ const ProductDetails = (props) => {
         setItemExist(false);
     }
     const addToCartHandler = (item) => {
-        const existItemIndex = cartCtx.items.findIndex((itm) => itm.id === item.id)
+        const existItemIndex = cartArray.findIndex((itm) => itm.id === item.id)
         if (existItemIndex !== -1) {
             setItemExist(true);
             return;
         }
-        cartCtx.addItem({
+        const product = {
             id: item.id,
             title: item.title,
             price: item.price
-        })
+        }
+        dispatch(cartActions.addItem({ item: product }));
     }
 
     if (!product) {

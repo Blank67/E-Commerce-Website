@@ -6,16 +6,17 @@ import reportWebVitals from './reportWebVitals';
 import '../node_modules/react-bootstrap/dist/react-bootstrap.min';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter } from 'react-router-dom';
-import AuthProvider from './firebase/AuthProvider';
+import { Provider } from 'react-redux';
+import store from './redux-store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Provider store={store}>
         <App />
-      </BrowserRouter>
-    </AuthProvider>
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

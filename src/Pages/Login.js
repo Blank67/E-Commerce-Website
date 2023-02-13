@@ -1,15 +1,15 @@
-import { Fragment, useContext, useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import AuthContext from "../firebase/auth-context";
+import { authActions } from "../redux-store/auth-slice/auth-slice";
 
 const Login = (props) => {
 
-    // const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [error, setError] = useState(false);
     const emailRef = useRef('');
     const passwordRef = useRef('');
-    const authCtx = useContext(AuthContext);
+    const dispatch = useDispatch();
     const history = useHistory();
 
     const onSubmitHandler = async (e) => {
@@ -34,14 +34,12 @@ const Login = (props) => {
             })
             // console.log(response);
             let transformedResponse = await response.json();
-            // console.log(transformedResponse);
             if (response.ok) {
-                authCtx.login(transformedResponse.idToken);
+                dispatch(authActions.login({ token: transformedResponse.idToken, uuID: transformedResponse.localId }));
                 history.replace('/store');
-                // setIsLoggedIn(true);
             } else {
                 let errorMessage = 'Authentication Failed!';
-                if(transformedResponse.error.message){
+                if (transformedResponse.error.message) {
                     errorMessage = transformedResponse.error.message;
                 }
                 throw new Error(errorMessage);
@@ -50,7 +48,6 @@ const Login = (props) => {
             alert(err.message)
         }
     }
-    // console.log(authCtx.token);
 
     return (
         <Fragment>

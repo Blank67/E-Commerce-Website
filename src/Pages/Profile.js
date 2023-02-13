@@ -1,13 +1,13 @@
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
-import AuthContext from "../firebase/auth-context";
+import { useSelector } from "react-redux";
 
 const Profile = (props) => {
 
     const newPasswordRef = useRef('');
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
-    const authCtx = useContext(AuthContext);
+    const token = useSelector(state => state.auth.token)
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -23,7 +23,7 @@ const Profile = (props) => {
             const response = await fetch(url, {
                 method: 'POST',
                 body: JSON.stringify({
-                    idToken: authCtx.token,
+                    idToken: token,
                     password: newPassword,
                     returnSecureToken: true
                 }),
@@ -35,7 +35,6 @@ const Profile = (props) => {
             const transformedResponse = await response.json();
             console.log(transformedResponse);
             if (response.ok) {
-                // authCtx.refresh(transformedResponse.refreshToken);
                 setSuccess(true);
             } else {
                 let errorMessage;
