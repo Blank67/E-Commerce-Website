@@ -21,7 +21,7 @@ const cartSlice = createSlice({
             state.cart = [];
             state.total = 0;
         },
-        replceCart(state, action) {
+        replaceCart(state, action) {
             state.cart = action.payload.cart;
             state.total = action.payload.total;
         }

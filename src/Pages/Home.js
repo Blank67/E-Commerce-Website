@@ -1,8 +1,18 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Jumbotron from "../Components/Layout/Jumbotron";
+import { fetchCartData } from "../redux-store/http-request/http-request";
 import './Home.css';
 
 const Home = (props) => {
+    const dispatch = useDispatch();
+    const uID = useSelector(state => state.auth.uuID);
+
+    useEffect(() => {
+        console.log('Get useEffect');
+        dispatch(fetchCartData((uID)));
+    }, [dispatch, uID]);
+
     return (
         <Fragment>
             <section><Jumbotron heading="The Generics" /></section>

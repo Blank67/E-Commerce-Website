@@ -1,16 +1,29 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Products from '../store/products'
 import Jumbotron from "../Components/Layout/Jumbotron";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../redux-store/cart-slice/cart-slice";
+import { fetchCartData, postCartData } from "../redux-store/http-request/http-request";
 
 const Store = (props) => {
 
     const cartArray = useSelector(state => state.cart.cart);
     const dispatch = useDispatch();
+    const cartSlice = useSelector(state => state.cart);
+    const uID = useSelector(state => state.auth.uuID);
     const [itemExist, setItemExist] = useState(false);
+
+    useEffect(() => {
+        console.log('Get useEffect');
+        dispatch(fetchCartData((uID)));
+    }, [dispatch, uID]);
+
+    useEffect(() => {
+        console.log('Post useEffect');
+        dispatch(postCartData(cartSlice, uID));
+    }, [dispatch, uID, cartSlice]);
 
     const removeAlertHandler = () => {
         setItemExist(false);
@@ -27,7 +40,7 @@ const Store = (props) => {
             title: item.title,
             price: item.price
         }
-        dispatch(cartActions.addItem({item: product}));
+        dispatch(cartActions.addItem({ item: product }));
     }
 
     const itemsList = Products.map((itm, index) => {

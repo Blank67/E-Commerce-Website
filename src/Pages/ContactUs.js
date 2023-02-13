@@ -1,5 +1,7 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCartData } from "../redux-store/http-request/http-request";
 
 const ContactUs = (props) => {
 
@@ -8,6 +10,13 @@ const ContactUs = (props) => {
     const nameRef = useRef('');
     const emailRef = useRef('');
     const phoneRef = useRef('');
+    const dispatch = useDispatch();
+    const uID = useSelector(state => state.auth.uuID);
+
+    useEffect(() => {
+        console.log('Get useEffect');
+        dispatch(fetchCartData((uID)));
+    }, [dispatch, uID]);
 
     const onSubmitHandler = (e) => {
         e.preventDefault();

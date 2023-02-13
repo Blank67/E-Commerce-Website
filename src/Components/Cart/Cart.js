@@ -3,12 +3,21 @@ import css from "./CartItem.module.css";
 import CartItem from "./CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../redux-store/cart-slice/cart-slice";
+import { useEffect } from "react";
+import { postCartData } from "../../redux-store/http-request/http-request";
 
 const Cart = (props) => {
     const cartArray = useSelector(state => state.cart.cart);
     const totalAmount = useSelector(state => state.cart.total);
     const dispatch = useDispatch();
     const hasItems = cartArray.length > 0;
+    const cartSlice = useSelector(state => state.cart);
+    const uID = useSelector(state => state.auth.uuID);
+
+    useEffect(() => {
+        console.log('Post useEffect');
+        dispatch(postCartData(cartSlice, uID));
+    }, [dispatch, uID, cartSlice]);
 
     const cartItemRemoveHandler = (itm) => {
         dispatch(cartActions.removeItem({ item: itm }));

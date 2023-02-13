@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { cartActions } from "../redux-store/cart-slice/cart-slice";
+import { fetchCartData } from "../redux-store/http-request/http-request";
 import Products from '../store/products'
 
 const ProductDetails = (props) => {
@@ -12,6 +13,12 @@ const ProductDetails = (props) => {
     const cartArray = useSelector(state => state.cart.cart);
     const product = Products.find((itm) => itm.id === params.productId);
     const [itemExist, setItemExist] = useState(false);
+    const uID = useSelector(state => state.auth.uuID);
+
+    useEffect(() => {
+        console.log('Get useEffect');
+        dispatch(fetchCartData((uID)));
+    }, [dispatch, uID]);
 
     const removeAlertHandler = () => {
         setItemExist(false);

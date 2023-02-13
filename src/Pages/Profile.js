@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCartData } from "../redux-store/http-request/http-request";
 
 const Profile = (props) => {
 
@@ -8,6 +9,13 @@ const Profile = (props) => {
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
     const token = useSelector(state => state.auth.token)
+    const dispatch = useDispatch();
+    const uID = useSelector(state => state.auth.uuID);
+
+    useEffect(() => {
+        console.log('Get useEffect');
+        dispatch(fetchCartData((uID)));
+    }, [dispatch, uID]);
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -31,9 +39,9 @@ const Profile = (props) => {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response);
+            // console.log(response);
             const transformedResponse = await response.json();
-            console.log(transformedResponse);
+            // console.log(transformedResponse);
             if (response.ok) {
                 setSuccess(true);
             } else {
