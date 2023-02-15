@@ -15,7 +15,7 @@ const Cart = (props) => {
     const uID = useSelector(state => state.auth.uuID);
 
     useEffect(() => {
-        console.log('Post useEffect');
+        // console.log('Post useEffect');
         dispatch(postCartData(cartSlice, uID));
     }, [dispatch, uID, cartSlice]);
 

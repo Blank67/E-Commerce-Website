@@ -16,12 +16,12 @@ const Store = (props) => {
     const [itemExist, setItemExist] = useState(false);
 
     useEffect(() => {
-        console.log('Get useEffect');
+        // console.log('Get useEffect');
         dispatch(fetchCartData((uID)));
     }, [dispatch, uID]);
 
     useEffect(() => {
-        console.log('Post useEffect');
+        // console.log('Post useEffect');
         dispatch(postCartData(cartSlice, uID));
     }, [dispatch, uID, cartSlice]);
 

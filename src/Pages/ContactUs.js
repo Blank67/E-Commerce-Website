@@ -14,7 +14,7 @@ const ContactUs = (props) => {
     const uID = useSelector(state => state.auth.uuID);
 
     useEffect(() => {
-        console.log('Get useEffect');
+        // console.log('Get useEffect');
         dispatch(fetchCartData((uID)));
     }, [dispatch, uID]);
 
@@ -30,7 +30,7 @@ const ContactUs = (props) => {
             email: emailRef.current.value,
             phone: phoneRef.current.value
         }
-        console.log(user);
+        // console.log(user);
         props.onPost(user);
         setSubmit(true);
         setError(false);

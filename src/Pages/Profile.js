@@ -13,7 +13,7 @@ const Profile = (props) => {
     const uID = useSelector(state => state.auth.uuID);
 
     useEffect(() => {
-        console.log('Get useEffect');
+        // console.log('Get useEffect');
         dispatch(fetchCartData((uID)));
     }, [dispatch, uID]);
 

@@ -24,7 +24,7 @@ export const fetchCartData = (uID) => {
     return async (dispatch) => {
         const getData = async () => {
             const response = await axios.get(`userData/${uID}.json`);
-            console.log('Get Req');
+            // console.log('Get Req');
             if (response.statusText !== 'OK') {
                 throw new Error("GET REQUEST FAIL.");
             }
@@ -34,7 +34,7 @@ export const fetchCartData = (uID) => {
         try {
             const data = await getData();
             if (data === null) {
-                console.log('Firebase is empty.');
+                // console.log('Firebase is empty.');
             } else if (!data.cart) {
                 dispatch(cartActions.replaceCart({ cart: [], total: 0 }));
             } else {
@@ -52,12 +52,12 @@ export const postCartData = (cartSlice, uID) => {
             // if (cartSlice.cart.length === 0) {
             //     console.log("Empty cart post request stopped!");
             // } else {
-            console.log('Post Req');
+            // console.log('Post Req');
             const response = await axios.put(`userData/${uID}.json`, cartSlice);
             if (response.statusText !== 'OK') {
                 throw new Error('POST REQUEST FAILED');
             } else {
-                console.log("SUCESS POST");
+                // console.log("SUCESS POST");
             }
             // }
         }
